@@ -22,4 +22,4 @@ def get_text(file_path) -> None:
     print(converters[file_extension](file_path))
 
 #вызов главной функции с указанием пути к файлу
-get_text('test.docx')
+get_text('test.pdf')

@@ -1,9 +1,9 @@
 from PIL import Image
 from pytesseract import pytesseract
+from constants import PATH_TO_TESSERACT
 
 
-path_to_tesseract = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-pytesseract.tesseract_cmd = path_to_tesseract
+pytesseract.tesseract_cmd = PATH_TO_TESSERACT
 
 def image_to_text(file_path) -> list:
     img = Image.open(file_path)
