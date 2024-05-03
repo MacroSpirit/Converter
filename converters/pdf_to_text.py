@@ -5,8 +5,12 @@ from converters.image_to_text import image_to_text
 from constants import POPPLER_PATH
 
 
+def pdf_to_text(file_path: str) -> list:
+    '''
+    takes file_path
+    return list of strings
+    '''
 
-def pdf_to_text(file_path) -> list:
     images = convert_from_path(file_path, poppler_path=POPPLER_PATH)
     text = []
 

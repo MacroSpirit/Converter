@@ -1,7 +1,12 @@
 import ezodf
 
 
-def odt_to_text(file_path) -> list:
+def odt_to_text(file_path: str) -> list:
+    '''
+    takes file_path
+    return list of strings
+    '''
+
     odt = ezodf.opendoc(file_path)
     text = []
 

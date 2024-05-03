@@ -5,6 +5,10 @@ from converters.txt_to_text import txt_to_text
 from converters.xlsx_to_text import xlsx_to_text
 from converters.odt_to_text import odt_to_text
 import os
+import g4f
+
+file_path = r'test_files\test.txt'
+theme = 'Япония 21 века'
 
 #словарь со всеми функциями конвертерами
 converters = {
@@ -17,9 +21,46 @@ converters = {
     '.odt': odt_to_text
 }
 
-def get_text(file_path) -> None:
-    _, file_extension = os.path.splitext(file_path)
-    print(converters[file_extension](file_path))
+def ask_bot(text: str) -> None:
+    '''
+    takes text
+    return None
+    '''
 
-#вызов главной функции с указанием пути к файлу
-get_text('test.pdf')
+    response = g4f.ChatCompletion.create(
+        model='gpt-3.5-turbo',
+        messages=[{'role': 'user', 'content': text}],
+    )
+
+    print(response)
+
+def get_text(file_path: str) -> None:
+    '''
+    takes file_path
+    return None
+    '''
+
+    _, file_extension = os.path.splitext(file_path)
+
+    if file_extension in converters:
+        return converters[file_extension](file_path)
+    else:
+        print('Unsupported file extension')
+
+def get_request() -> str:
+    '''
+    takes None
+    return: str
+    '''
+
+    result = get_text(file_path)
+    text = ' '.join(result)
+    message = f'Соответствует ли данный текст: "{text}" теме: "{theme}"'
+
+    return message
+
+#вызов главной функции
+if __name__ == '__main__':
+    message = get_request()
+
+    ask_bot(message)
