@@ -8,9 +8,6 @@ import os
 import g4f
 import logging
 
-#file_path = r'test_files\test.txt'
-#theme = 'Япония 21 века'
-
 #словарь со всеми функциями конвертерами
 converters = {
     '.jpeg': image_to_text,
@@ -31,6 +28,7 @@ formatter = logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s")
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
+
 def ask_bot(text: str) -> None:
     '''
     takes text
@@ -42,10 +40,12 @@ def ask_bot(text: str) -> None:
         messages=[{'role': 'user', 'content': text}],
     )
 
+
     if response:
         logger.info(f'ChatGPT response: {response}')
     else:
         logger.error(f'No response from ChatGPT')
+
 
 def get_text(file_path: str) -> None:
     '''
@@ -62,6 +62,7 @@ def get_text(file_path: str) -> None:
     else:
         logger.error(f'Unsupported file extension')
 
+
 def get_request(theme, file_path) -> str:
     '''
     takes None
@@ -73,6 +74,7 @@ def get_request(theme, file_path) -> str:
     message = f'Соответствует ли данный текст: "{text}" теме: "{theme}"'
 
     return message
+
 
 #вызов главной функции
 if __name__ == '__main__':
